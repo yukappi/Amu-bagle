@@ -1,0 +1,9 @@
+# Local settings (copy config.sample.php to config.php)
+/config/config.php
+# Uploaded product images
+/public/uploads/products/*
+!/public/uploads/products/.gitkeep
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

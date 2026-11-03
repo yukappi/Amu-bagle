@@ -36,3 +36,16 @@ INSERT INTO open_day_products (open_day_id, product_id) VALUES
 -- Admin account (password: amubagel2026)
 INSERT INTO admins (username, password_hash) VALUES
     ('admin', '$2y$10$ISNM2r0B.LJXWZynpAZHy.A3bhC.O7diNKSLLLsNYjqgryjGUjIZq');
+
+-- Shops that sell our bagels (address, hours and URL are not confirmed yet)
+INSERT INTO shops (name_ja, name_en, days_ja, days_en, description_ja, description_en, sort_order) VALUES
+    ('CRAMBOX 美原町店', 'CRAMBOX Miharamachi',
+        '毎週 木・金', 'Every Thu & Fri',
+        'AMU BAGELのベーグルがならぶお店です。',
+        'A shop where you can find AMU BAGEL bagels.',
+        1),
+    ('カミトンノ珈琲焙煎所', 'Kamitonno Coffee Roastery',
+        '毎週 金・土', 'Every Fri & Sat',
+        'AMU BAGELのベーグルを販売しているコーヒー焙煎所です。',
+        'A coffee roastery that sells AMU BAGEL bagels.',
+        2);

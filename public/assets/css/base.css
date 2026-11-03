@@ -1,0 +1,83 @@
+:root{
+    --c-lemon: #fff3a6;
+    --c-sky: #bfe6f7;
+    --c-pink: #ffc9dc;
+    --c-navy: #23345c;
+    --c-bg: #fffdf5;
+    --c-text: #23345c;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: "Hiragino Maru Gothic ProN","Meiryo",sans-serif;
+    line-height: 1.7;
+}
+
+a{
+    color: var(--c-navy);
+}
+
+.container{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.site-header{
+    background: var(--c-lemon);
+    border-bottom: 4px dotted var(--c-pink);
+}
+
+.header-inner{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.logo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.site-nav ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav a{
+    display: block;
+    padding: 4px 14px;
+    border-radius:999px;
+    text-decoration: none;
+    background: #fff;
+}
+
+.site-nav a:hover{
+    background: var(--c-pink);
+}
+
+main{
+    padding-top: 24px;
+    padding-bottom: 48px;
+}
+
+.site-footer{
+    background: var(--c-sky);
+    text-align: center;
+    padding: 16px 0;
+}

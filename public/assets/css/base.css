@@ -168,3 +168,18 @@ main{
 .pick p{
     margin: 0;
 }
+
+.tag{
+    display: inline-block;
+    background: var(--c-lemon);
+    border-radius: 999px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+.soldout{
+    color: #c0392b;
+    font-weight: bold;
+}
+

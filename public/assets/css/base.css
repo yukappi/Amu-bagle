@@ -103,7 +103,7 @@ main{
 }
 
 .shop-card h3{
-    margin: 0 0 8px;
+    margin: 0 0 8px;        
 }
 
 
@@ -117,4 +117,54 @@ main{
     border-radius: 999px;
     padding: 2px 12px;
     font-size: 0.9rem;
+}
+
+.next-open{
+    background: #fff;
+    border: 2px solid var(--c-pink);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+}
+.next-open .big{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;   
+}
+
+.btn{
+    display: inline-block;
+    background: var(--c-pink);
+    padding: 6px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pick-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.pick{
+    display: block;
+    background: #fff;
+    border: 2px solid var(--c-sky);
+    border-radius: 16px;
+    padding: 12px 16px;
+    text-decoration: none;
+}
+
+.pick img{
+    width: 100%;
+    border-radius: 12px;
+}
+
+.pick h3{
+
+    margin: 8px 0 4px;
+}
+.pick p{
+    margin: 0;
 }

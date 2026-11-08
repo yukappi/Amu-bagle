@@ -49,3 +49,23 @@ INSERT INTO shops (name_ja, name_en, days_ja, days_en, description_ja, descripti
         'AMU BAGELのベーグルを販売しているコーヒー焙煎所です。',
         'A coffee roastery that sells AMU BAGEL bagels.',
         2);
+
+-- Allergens (id 1-11 are assigned in this order)
+INSERT INTO allergens (name_ja, name_en, sort_order) VALUES
+    ('小麦', 'Wheat', 1),
+    ('乳', 'Milk', 2),
+    ('卵', 'Egg', 3),
+    ('大豆', 'Soy', 4),
+    ('くるみ', 'Walnut', 5),
+    ('アーモンド', 'Almond', 6),
+    ('カシューナッツ', 'Cashew', 7),
+    ('ピーナッツ', 'Peanut', 8),
+    ('そば', 'Buckwheat', 9),
+    ('えび', 'Shrimp', 10),
+    ('かに', 'Crab', 11);
+
+-- Which allergens each bagel has (product_id, allergen_id)
+INSERT INTO product_allergens (product_id, allergen_id) VALUES
+    (1, 1),
+    (2, 1), (2, 2), (2, 3),
+    (3, 1), (3, 2);

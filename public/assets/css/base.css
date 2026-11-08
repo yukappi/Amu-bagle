@@ -233,3 +233,57 @@ button.btn{
     outline: 3px solid var(--c-navy);
     outline-offset: 2px;
 }
+
+/* Product page */
+.product {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+    align-items: start;
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.product-info h1 {
+    margin: 8px 0 4px;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 0 12px;
+}
+
+.product-info h2 {
+    font-size: 1.1rem;
+    margin: 24px 0 8px;
+}
+
+.allergen-list,
+.day-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.allergen-list li {
+    background: #fff;
+    border: 2px solid var(--c-pink);
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: 0.9rem;
+}
+
+.day-list li {
+    background: var(--c-sky);
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: 0.9rem;
+}

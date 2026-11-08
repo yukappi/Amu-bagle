@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
 
-// ===== 0) Empty cart -> back to the cart page =====
+//  0) Empty cart -> back to the cart page 
 $cart = $_SESSION['cart'] ?? ['open_day_id' => null, 'items' => []];
 if (!$cart['items']) {
     header('Location: cart.php');
     exit;
 }
 
-// ===== 1) Read the cart from the DB (same as cart.php) =====
+//  1) Read the cart from the DB (same as cart.php) 
 $ids   = array_keys($cart['items']);
 $marks = implode(',', array_fill(0, count($ids), '?'));
 $stmt  = db()->prepare(
@@ -34,28 +34,28 @@ $stmt = db()->prepare("SELECT open_date, open_time, close_time FROM open_days WH
 $stmt->execute([$cart['open_day_id']]);
 $openDay = $stmt->fetch();
 
-// ===== 2) Pickup times: every 30 minutes, from open to close =====
+// 2) Pickup times: every 30 minutes, from open to close 
 // 11:00, 11:30, ... 15:30
 $times = [];
 $t   = strtotime($openDay['open_time']);
 $end = strtotime($openDay['close_time']);
 while ($t < $end) {
     $times[] = date('H:i', $t);
-    $t += 30 * 60;                 // 30分 = 30 × 60秒
+    $t += 30 * 60;                 
 }
 
-// ===== 3) The form =====
+//  3) The form 
 // what the customer typed (kept in the session so "戻る" keeps it)
 $form = $_SESSION['checkout'] ?? ['name' => '', 'phone' => '', 'email' => '', 'time' => '', 'note' => ''];
 $errors = [];
-$step   = 'input';                 // 'input' = 入力画面, 'confirm' = 確認画面
+$step   = 'input';                
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = $_POST['action'] ?? '';
 
     if ($action === 'confirm') {
-        // trim = 前後の空白を消す
+        
         $form = [
             'name'  => trim($_POST['name'] ?? ''),
             'phone' => trim($_POST['phone'] ?? ''),
@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'time'  => $_POST['time'] ?? '',
             'note'  => trim($_POST['note'] ?? ''),
         ];
-        // 全角の数字やハイフンを半角に（０９０ー → 090-）
+        
         $form['phone'] = str_replace(['ー', '−', '‐'], '-', mb_convert_kana($form['phone'], 'a'));
 
-        // ---- check each field ----
+        //  check each field 
         if ($form['name'] === '') {
             $errors['name'] = 'お名前を入れてください。';
         } elseif (mb_strlen($form['name']) > 100) {
@@ -91,15 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['checkout'] = $form;
         if (!$errors) {
-            $step = 'confirm';     // 全部OK → 確認画面へ
+            $step = 'confirm';    
         }
     }
 
     if ($action === 'place') {
-        // 予約の確定は、次のステップで作ります
+       
         exit('ここは次のステップで作ります。');
     }
-    // 'back' のときは何もしない → 入力画面（前の入力が残っている）
 }
 
 $pageTitle = 'ご予約 | あむべ〜ぐる';
@@ -134,7 +133,7 @@ require __DIR__ . '/../includes/templates/header.php';
 <?php endif; ?>
 
 <?php if ($step === 'input'): ?>
-  <!-- ===== input screen ===== -->
+  <!-- input screen -->
   <form class="checkout-form" method="post" action="checkout.php">
     <?= csrf_field() ?>
     <input type="hidden" name="action" value="confirm">
@@ -181,7 +180,7 @@ require __DIR__ . '/../includes/templates/header.php';
   </form>
 
 <?php else: ?>
-  <!-- ===== confirm screen ===== -->
+  <!-- confirm screen  -->
   <dl class="confirm-list">
     <dt>お名前</dt>        <dd><?= h($form['name']) ?></dd>
     <dt>電話番号</dt>      <dd><?= h($form['phone']) ?></dd>

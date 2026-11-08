@@ -288,7 +288,7 @@ button.btn{
     font-size: 0.9rem;
 }
 
-/* ===== product page: add to cart ===== */
+/*product page: add to cart */
 .add-cart {
     display: flex;
     flex-wrap: wrap;
@@ -306,7 +306,7 @@ button.btn{
     font-size: 0.9rem;
 }
 
-/* ===== cart page ===== */
+/*cart page*/
 .flash {
     background: var(--c-sky);
     padding: 8px 14px;
@@ -346,4 +346,52 @@ button.btn{
     gap: 16px;
     align-items: center;
     justify-content: space-between;
+}
+
+/*checkout*/
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 480px;
+    margin-top: 24px;
+}
+
+.checkout-form label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea {
+    padding: 6px 10px;
+    border: 2px solid var(--c-sky);
+    border-radius: 12px;
+    font: inherit;
+}
+
+.error {
+    color: #c0392b;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.confirm-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 20px;
+    background: #fff;
+    padding: 16px 20px;
+    border-radius: 12px;
+}
+
+.confirm-list dt {
+    font-weight: bold;
+}
+
+.confirm-list dd {
+    margin: 0;
 }

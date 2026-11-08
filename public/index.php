@@ -1,4 +1,4 @@
-<?php
+    <?php
 require_once __DIR__ . '/../includes/init.php';
 $pdo = db();   // get the DB connection
 
@@ -12,7 +12,7 @@ $next = $pdo->query($sql)->fetch();
 
 // how long until the order deadline
 $leftText = '';
-if ($next) {
+if ($next) {    
     $now    = new DateTime();
     $cutoff = new DateTime($next['cutoff_at']);
     if ($now < $cutoff) {
@@ -75,7 +75,7 @@ require __DIR__ . '/../includes/templates/header.php';
           <img src="<?= h($p['image_path']) ?>" alt="<?= h($p['name_ja']) ?>">
         <?php endif; ?>
         <h3><?= h($p['name_ja']) ?></h3>
-        <p><?= h(number_format($p['price'])) ?> Ft</p>
+        <p><?= h(number_format($p['price'])) ?> 円</p>
       </a>
     <?php endforeach; ?>
   </div>

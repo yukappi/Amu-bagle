@@ -23,10 +23,12 @@ a{
     color: var(--c-navy);
 }
 
+
 .container{
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .site-header{
@@ -67,7 +69,8 @@ a{
     background: #fff;
 }
 
-.site-nav a:hover{
+.site-nav a:hover ,
+.site-nav a:focus-visible{
     background: var(--c-pink);
 }
 
@@ -88,7 +91,7 @@ main{
 
 .shop-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 16px;
     margin: 0;
     padding: 0;
@@ -140,11 +143,17 @@ main{
     text-decoration: none;
     font-weight: bold;
 }
+.btn:hover{
+    background: var(--c-lemon);
+}
 
 .pick-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
     gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .pick{
@@ -156,8 +165,14 @@ main{
     text-decoration: none;
 }
 
+.pick:hover{
+    border-color: var(--c-pink);
+}
+
 .pick img{
+    display: block;
     width: 100%;
+    height: auto;
     border-radius: 12px;
 }
 
@@ -183,3 +198,38 @@ main{
     font-weight: bold;
 }
 
+.filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.filters label{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.filters select{
+    padding: 6px 10px;
+    border: 2px solid var(--c-sky);
+    border-radius: 12px;
+    background: #fff;
+    font: inherit;
+}
+
+button.btn{
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+}
+
+.btn:focus-visible,
+.pick:focus-visible,
+.filters select:focus-visible{
+    outline: 3px solid var(--c-navy);
+    outline-offset: 2px;
+}

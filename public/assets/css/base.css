@@ -287,3 +287,63 @@ button.btn{
     padding: 2px 12px;
     font-size: 0.9rem;
 }
+
+/* ===== product page: add to cart ===== */
+.add-cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: end;
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--c-lemon);
+    border-radius: 12px;
+}
+
+.add-cart label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+/* ===== cart page ===== */
+.flash {
+    background: var(--c-sky);
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 8px;
+    border-bottom: 2px dotted var(--c-pink);
+    text-align: left;
+}
+
+.qty-form input {
+    width: 4em;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.2rem;
+}
+
+.notice {
+    color: #c0392b;
+    text-align: right;
+}
+
+.cart-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+}

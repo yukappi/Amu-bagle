@@ -36,15 +36,15 @@ $stmt = db()->prepare(
 $stmt->execute([$id]);
 $allergens = $stmt->fetchAll();
 
-// 3) upcoming open days that sell this bagel
+// 3) open days you can still order for (deadline not passed yet)
 $stmt = db()->prepare(
-    "SELECT od.open_date
+    "SELECT od.id, od.open_date
      FROM open_day_products odp
      JOIN open_days od ON od.id = odp.open_day_id
-     WHERE odp.product_id = ? AND od.open_date >= CURDATE()
+     WHERE odp.product_id = ? AND od.cutoff_at > ?
      ORDER BY od.open_date"
 );
-$stmt->execute([$id]);
+$stmt->execute([$id, date('Y-m-d H:i:s')]);
 $days = $stmt->fetchAll();
 
 $pageTitle = $product['name_ja'] . ' | あむべ〜ぐる';
@@ -88,6 +88,31 @@ require __DIR__ . '/../includes/templates/header.php';
     <?php else: ?>
       <p>次のOPEN日の販売はまだ決まっていません。</p>
     <?php endif; ?>
+ <?php if ($days && !$product['is_sold_out']): ?>
+      <form class="add-cart" method="post" action="cart.php">
+        <?= csrf_field() ?>
+        <input type="hidden" name="action" value="add">
+        <input type="hidden" name="product_id" value="<?= h($product['id']) ?>">
+
+        <label>
+          受け取る日
+          <select name="open_day_id">
+            <?php foreach ($days as $d): ?>
+              <option value="<?= h($d['id']) ?>"><?= h(date('n月j日', strtotime($d['open_date']))) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </label>
+
+        <label>
+          個数
+          <input type="number" name="qty" value="1" min="1" max="20">
+        </label>
+
+        <button class="btn" type="submit">カートに入れる</button>
+      </form>
+    <?php endif; ?>
+
+
   </div>
 </article>
 

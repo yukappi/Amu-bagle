@@ -403,3 +403,24 @@ button.btn{
     color: #c0392b;
     padding: 12px 12px 12px 32px;
 }
+
+/*admin*/
+.admin-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.status {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+}
+
+.status-received { background: var(--c-sky); }
+.status-ready { background: var(--c-lemon); }
+.status-picked_up { background: #e0e0e0; }
+.status-cancelled { background: var(--c-pink); text-decoration: line-through; }

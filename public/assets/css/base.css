@@ -395,3 +395,11 @@ button.btn{
 .confirm-list dd {
     margin: 0;
 }
+/*error box*/
+.error-box {
+    background: #fff;
+    border: 2px solid #c0392b;
+    border-radius: 12px;
+    color: #c0392b;
+    padding: 12px 12px 12px 32px;
+}

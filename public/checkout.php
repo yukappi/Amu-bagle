@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/reservation.php';
 
 //  0) Empty cart -> back to the cart page 
 $cart = $_SESSION['cart'] ?? ['open_day_id' => null, 'items' => []];
@@ -24,7 +25,7 @@ $count = 0;
 foreach ($stmt->fetchAll() as $p) {
     $qty      = $cart['items'][$p['id']];
     $subtotal = $p['price'] * $qty;
-    $rows[]   = ['name' => $p['name_ja'], 'price' => $p['price'], 'qty' => $qty, 'subtotal' => $subtotal];
+    $rows[]   = ['id' => $p['id'], 'name' => $p['name_ja'], 'price' => $p['price'], 'qty' => $qty, 'subtotal' => $subtotal];
     $total += $subtotal;
     $count += $qty;
 }
@@ -48,6 +49,7 @@ while ($t < $end) {
 // what the customer typed (kept in the session so "戻る" keeps it)
 $form = $_SESSION['checkout'] ?? ['name' => '', 'phone' => '', 'email' => '', 'time' => '', 'note' => ''];
 $errors = [];
+$ruleErrors = [];
 $step   = 'input';                
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -93,11 +95,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$errors) {
             $step = 'confirm';    
         }
+        $_SESSION['checkout_ok'] = !$errors;
     }
 
-    if ($action === 'place') {
-       
-        exit('ここは次のステップで作ります。');
+       if ($action === 'place') {
+        // must come from the confirm screen
+        if (empty($_SESSION['checkout_ok'])) {
+            header('Location: checkout.php');
+            exit;
+        }
+ 
+        $pdo = db();
+        $pdo->beginTransaction();
+        try {
+            $ruleErrors = reservation_errors($cart, true);
+ 
+            if (!$ruleErrors) {
+                // order code like AB-261118-001
+                $stmt = $pdo->prepare('SELECT COUNT(*) FROM orders WHERE open_day_id = ?');
+                $stmt->execute([$cart['open_day_id']]);
+                $no   = (int)$stmt->fetchColumn() + 1;
+                $code = 'AB-' . date('ymd', strtotime($openDay['open_date'])) . '-' . sprintf('%03d', $no);
+ 
+                // save the order
+                $stmt = $pdo->prepare(
+                    "INSERT INTO orders
+                       (order_code, open_day_id, customer_name, phone, email, pickup_time, total_items, total_price, note)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                );
+                $stmt->execute([
+                    $code,
+                    $cart['open_day_id'],
+                    $form['name'],
+                    $form['phone'],
+                    $form['email'],
+                    $form['time'],
+                    $count,
+                    $total,
+                    $form['note'] === '' ? null : $form['note'],
+                ]);
+                $orderId = (int)$pdo->lastInsertId();
+ 
+                // save the items (copy name and price too)
+                $stmt = $pdo->prepare(
+                    "INSERT INTO order_items (order_id, product_id, product_name, quantity, unit_price)
+                     VALUES (?, ?, ?, ?, ?)"
+                );
+                foreach ($rows as $r) {
+                    $stmt->execute([$orderId, $r['id'], $r['name'], $r['qty'], $r['price']]);
+                }
+ 
+                $pdo->commit();
+ 
+                // empty the cart and go to the complete page
+                $_SESSION['last_order_id'] = $orderId;
+                unset($_SESSION['cart'], $_SESSION['checkout'], $_SESSION['checkout_ok']);
+                header('Location: complete.php');
+                exit;
+            }
+ 
+            $pdo->rollBack();
+        } catch (Throwable $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+ 
+        $step = 'confirm';
     }
 }
 
@@ -181,6 +244,13 @@ require __DIR__ . '/../includes/templates/header.php';
 
 <?php else: ?>
   <!-- confirm screen  -->
+  <?php if ($ruleErrors): ?>
+    <ul class="error-box">
+      <?php foreach ($ruleErrors as $msg): ?>
+        <li><?= h($msg) ?></li>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
   <dl class="confirm-list">
     <dt>お名前</dt>        <dd><?= h($form['name']) ?></dd>
     <dt>電話番号</dt>      <dd><?= h($form['phone']) ?></dd>

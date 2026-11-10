@@ -117,7 +117,11 @@ require __DIR__ . '/../../includes/templates/header.php';
           <?php else: ?>
             <?php $day = $open[$date] ?? null; ?>
             <td class="<?= $day ? 'is-open' : 'is-closed' ?>">
-              <span class="cal-date"><?= h((string)(int)substr($date, 8)) ?></span>
+              <?php if ($day): ?>
+                <a class="cal-date" href="open_day_edit.php?date=<?= h($date) ?>"><?= h((string)(int)substr($date, 8)) ?></a>
+              <?php else: ?>
+                <span class="cal-date"><?= h((string)(int)substr($date, 8)) ?></span>
+              <?php endif; ?>
               <?php if ($day): ?>
                 <span class="cal-booked">予約 <?= h((string)$day['booked']) ?> / <?= h((string)$day['max_items']) ?></span>
               <?php endif; ?>

@@ -424,3 +424,10 @@ button.btn{
 .status-ready { background: var(--c-lemon); }
 .status-picked_up { background: #e0e0e0; }
 .status-cancelled { background: var(--c-pink); text-decoration: line-through; }
+
+.status-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}

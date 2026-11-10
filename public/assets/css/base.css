@@ -486,3 +486,43 @@ button.btn{
     padding: 2px 6px;
     cursor: pointer;
 }
+
+/*products admin*/
+.thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-table tr.is-hidden {
+    opacity: 0.5;
+}
+
+.row-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.row-buttons button {
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.check-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 10px;
+    border: 2px solid var(--c-sky);
+    border-radius: 12px;
+}
+
+.checkout-form .check-list label {
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    margin-top: 0;
+}

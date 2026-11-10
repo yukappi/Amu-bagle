@@ -421,8 +421,11 @@ button.btn{
 }
 
 .status-received { background: var(--c-sky); }
+
 .status-ready { background: var(--c-lemon); }
+
 .status-picked_up { background: #e0e0e0; }
+
 .status-cancelled { background: var(--c-pink); text-decoration: line-through; }
 
 .status-buttons{
@@ -430,4 +433,56 @@ button.btn{
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 20px;
+}
+
+/*open days calendar*/
+.cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-bottom: 32px;
+}
+
+.calendar th,
+.calendar td {
+    border: 1px solid #e5e0cc;
+    padding: 6px;
+    vertical-align: top;
+}
+
+.calendar td {
+    height: 96px;
+    background: #fff;
+}
+
+.calendar td.is-open {
+    background: var(--c-lemon);
+}
+
+.calendar td.is-closed {
+    color: #999;
+}
+
+.cal-date {
+    display: block;
+    font-weight: bold;
+}
+
+.cal-booked {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.calendar button {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    cursor: pointer;
 }

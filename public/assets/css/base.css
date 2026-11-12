@@ -525,4 +525,22 @@ button.btn{
     align-items: center;
     gap: 4px;
     margin-top: 0;
+}       
+
+.admin-nav {
+    background: var(--c-navy);
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.admin-nav .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.admin-nav a {
+    color: #fff;
 }

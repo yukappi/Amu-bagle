@@ -544,3 +544,31 @@ button.btn{
 .admin-nav a {
     color: #fff;
 }
+
+/*edit rows (categories, allergens)*/
+.edit-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 80px 60px auto auto;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.edit-head {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.edit-row input {
+    min-width: 0;
+    padding: 4px 8px;
+    border: 2px solid var(--c-sky);
+    border-radius: 8px;
+    font: inherit;
+}
+
+@media (max-width: 600px) {
+    .edit-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}

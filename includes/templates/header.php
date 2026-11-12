@@ -32,6 +32,8 @@
         <a href="<?= h(url('admin/open_days.php')) ?>">OPEN日</a>
         <a href="<?= h(url('admin/products.php')) ?>">商品</a>
         <a href="<?= h(url('admin/categories.php')) ?>">種類</a>
+        <a href="<?= h(url('admin/allergens.php')) ?>">アレルギー</a>
+        <a href="<?= h(url('admin/shops.php')) ?>">卸先</a>
     </div>
 </nav>
 <?php endif; ?>

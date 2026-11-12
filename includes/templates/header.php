@@ -16,10 +16,11 @@
         <a class="logo" href="<?= h(url('index.php')) ?>">あむべ〜ぐる</a>
         <nav class="site-nav">
             <ul>
+                <li><a href="<?= h(url('index.php')) ?>">トップ</a></li>
                 <li><a href="<?= h(url('about.php')) ?>">お店紹介</a></li>
                 <li><a href="<?= h(url('menu.php')) ?>">メニュー</a></li>
-                <li><a href="<?= h(url('shops.php')) ?>">取扱店</a></li>
                 <li><a href="<?= h(url('cart.php')) ?>">カート</a></li>
+                <li><a href="<?= h(url('admin/index.php')) ?>">お店の管理</a></li>
             </ul>
         </nav>
     </div>

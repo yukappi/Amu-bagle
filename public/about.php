@@ -4,29 +4,29 @@ require_once __DIR__ . '/../includes/init.php';
 // Ask MySQL for all shops (SQL sent from PHP)
 $shops = db()->query('SELECT * FROM shops ORDER BY sort_order')->fetchAll();
 
-$pageTitle = 'お店紹介 | あむべ〜ぐる';
+$pageTitle = t('nav.about') . ' | あむべ〜ぐる';
 require __DIR__ . '/../includes/templates/header.php';
 ?>
 
-<h1>お店紹介</h1>
+<h1><?= h(t('nav.about')) ?></h1>
 
 <section class="about-shop">
     <h2>あむべ〜ぐる</h2>
-    <p>福岡県中間市の小さなベーグル屋さんです。OPEN日は不定期で、ほぼ週1回です。</p>
-    <p>住所：福岡県中間市鍋山町2-14</p>
-    <p>営業時間：11:00〜16:00（OPEN日のみ）</p>
+    <p><?= h(t('about.intro')) ?></p>
+    <p><?= h(t('about.address')) ?><?= h(t('about.our_address')) ?></p>
+    <p><?= h(t('about.hours')) ?><?= h(t('about.our_hours')) ?></p>
 </section>
 
-<section class="shops">
-    <h2>ベーグルが買えるお店</h2>
+<section class="shops" id="shops">
+    <h2><?= h(t('about.shops')) ?></h2>
     <ul class="shop-list">
         <?php foreach ($shops as $shop): ?>
             <li class="shop-card">
-                <h3><?= h($shop['name_ja']) ?></h3>
-                <p class="shop-days"><?= h($shop['days_ja']) ?></p>
-                <p><?= h($shop['description_ja']) ?></p>
-                <p>住所：<?= h($shop['address'] ?? '確認中') ?></p>
-                <p>営業時間：<?= h($shop['hours'] ?? '確認中') ?></p>
+                <h3><?= h(localized($shop, 'name')) ?></h3>
+                <p class="shop-days"><?= h(localized($shop, 'days')) ?></p>
+                <p><?= h(localized($shop, 'description')) ?></p>
+                <p><?= h(t('about.address')) ?><?= h($shop['address'] ?? t('about.unknown')) ?></p>
+                <p><?= h(t('about.hours')) ?><?= h($shop['hours'] ?? t('about.unknown')) ?></p>
             </li>
         <?php endforeach; ?>
     </ul>

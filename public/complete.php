@@ -23,41 +23,41 @@ $stmt = db()->prepare("SELECT * FROM order_items WHERE order_id = ?");
 $stmt->execute([$orderId]);
 $items = $stmt->fetchAll();
 
-$pageTitle = 'ご予約ありがとうございました | あむべ〜ぐる';
+$pageTitle = t('done.title') . ' | あむべ〜ぐる';
 require __DIR__ . '/../includes/templates/header.php';
 ?>
 
-<h1>ご予約ありがとうございました！</h1>
+<h1><?= h(t('done.title')) ?></h1>
 
 <div class="next-open">
-  <p>予約番号</p>
+  <p><?= h(t('done.code')) ?></p>
   <p class="big"><?= h($order['order_code']) ?></p>
-  <p>お店で予約番号をお伝えください。</p>
+  <p><?= h(t('done.tell')) ?></p>
 </div>
 
 <dl class="confirm-list">
-  <dt>受け取り日</dt> <dd><?= h(date('n月j日', strtotime($order['open_date']))) ?></dd>
-  <dt>来店時間</dt>   <dd><?= h(date('G:i', strtotime($order['pickup_time']))) ?></dd>
-  <dt>お名前</dt>     <dd><?= h($order['customer_name']) ?></dd>
+  <dt><?= h(t('order.day')) ?></dt> <dd><?= h(format_date($order['open_date'])) ?></dd>
+  <dt><?= h(t('order.time')) ?></dt> <dd><?= h(date('G:i', strtotime($order['pickup_time']))) ?></dd>
+  <dt><?= h(t('order.name')) ?></dt> <dd><?= h($order['customer_name']) ?></dd>
 </dl>
 
 <table class="cart-table">
   <thead>
-    <tr><th>ベーグル</th><th>値段</th><th>個数</th><th>小計</th></tr>
+    <tr><th><?= h(t('order.bagel')) ?></th><th><?= h(t('order.price')) ?></th><th><?= h(t('product.qty')) ?></th><th><?= h(t('order.subtotal')) ?></th></tr>
   </thead>
   <tbody>
     <?php foreach ($items as $it): ?>
       <tr>
         <td><?= h($it['product_name']) ?></td>
-        <td><?= h(number_format($it['unit_price'])) ?> 円</td>
+        <td><?= h(price($it['unit_price'])) ?></td>
         <td><?= h((string)$it['quantity']) ?></td>
-        <td><?= h(number_format($it['unit_price'] * $it['quantity'])) ?> 円</td>
+        <td><?= h(price($it['unit_price'] * $it['quantity'])) ?></td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-<p class="cart-total">合計 <?= h((string)$order['total_items']) ?> 個　<strong><?= h(number_format($order['total_price'])) ?> 円</strong></p>
+<p class="cart-total"><?= h(sprintf(t('order.total'), $order['total_items'])) ?> <strong><?= h(price($order['total_price'])) ?></strong></p>
 
-<p><a class="btn" href="index.php">トップへもどる</a></p>
+<p><a class="btn" href="index.php"><?= h(t('done.back')) ?></a></p>
 
 <?php require __DIR__ . '/../includes/templates/footer.php'; ?>

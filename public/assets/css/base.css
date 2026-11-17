@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap');
+
 :root{
     --c-lemon: #fff3a6;
     --c-sky: #bfe6f7;
@@ -5,6 +7,7 @@
     --c-navy: #23345c;
     --c-bg: #fffdf5;
     --c-text: #23345c;
+    --c-hot: #e8467c;
 }
 
 *{
@@ -599,4 +602,103 @@ button.btn{
         width: 100%;
         text-align: center;
     }
+}
+
+/* new look (yellow dots, white card, navy lines) */
+body {
+    background-color: #ffd447;
+    background-image: radial-gradient(#fff 3px, transparent 4px);
+    background-size: 28px 28px;
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 4px solid var(--c-navy);
+}
+
+.logo {
+    font-weight: 800;
+}
+
+.site-nav a {
+    background: transparent;
+    border: 3px solid transparent;
+    font-weight: bold;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+    background: var(--c-sky);
+    border-color: var(--c-navy);
+}
+
+.site-nav .lang-btn {
+    border-color: var(--c-navy);
+}
+
+main.container {
+    background: #fff;
+    border: 4px solid var(--c-navy);
+    border-radius: 28px;
+    box-shadow: 8px 8px 0 var(--c-navy);
+    margin-top: 32px;
+    margin-bottom: 48px;
+    padding: 24px 32px 40px;
+}
+
+.btn {
+    background: var(--c-hot);
+    color: #fff;
+    border: 3px solid var(--c-navy);
+    box-shadow: 4px 4px 0 var(--c-navy);
+}
+
+.btn:hover {
+    background: var(--c-hot);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--c-navy);
+}
+
+.site-footer {
+    background: var(--c-navy);
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    main.container {
+        margin: 16px 8px 32px;
+        padding: 16px 16px 32px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 0 var(--c-navy);
+    }
+}
+
+/* nav: the page we are on, and the cart */
+.site-nav a[aria-current="page"] {
+    background: var(--c-sky);
+    border-color: var(--c-navy);
+}
+
+.site-nav a.cart-link {
+    background: var(--c-hot);
+    color: #fff;
+    border-color: var(--c-navy);
+}
+
+.site-nav a.cart-link:hover,
+.site-nav a.cart-link:focus-visible {
+    background: #d23a6c;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 1.6em;
+    margin-left: 4px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--c-hot);
+    font-size: 0.85rem;
+    text-align: center;
 }

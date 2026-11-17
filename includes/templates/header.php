@@ -1,6 +1,8 @@
 <?php
 // Common header for every page
 // Before including this file, set $pageTitle on the page
+// how many bagels are in the cart (for the badge)
+$cartCount = array_sum($_SESSION['cart']['items'] ?? []);
 ?>
 <!DOCTYPE html>
 <html lang="<?= h(current_lang()) ?>">
@@ -16,10 +18,10 @@
         <a class="logo" href="<?= h(url('index.php')) ?>">あむべ〜ぐる</a>
         <nav class="site-nav">
             <ul>
-                <li><a href="<?= h(url('index.php')) ?>"><?= h(t('nav.top')) ?></a></li>
-                <li><a href="<?= h(url('about.php')) ?>"><?= h(t('nav.about')) ?></a></li>
-                <li><a href="<?= h(url('menu.php')) ?>"><?= h(t('nav.menu')) ?></a></li>
-                <li><a href="<?= h(url('cart.php')) ?>"><?= h(t('nav.cart')) ?></a></li>
+                <li><a href="<?= h(url('index.php')) ?>"<?= current_page('index.php') ?>><?= h(t('nav.top')) ?></a></li>
+                <li><a href="<?= h(url('about.php')) ?>"<?= current_page('about.php') ?>><?= h(t('nav.about')) ?></a></li>
+                <li><a href="<?= h(url('menu.php')) ?>"<?= current_page('menu.php') ?>><?= h(t('nav.menu')) ?></a></li>
+                <li><a class="cart-link" href="<?= h(url('cart.php')) ?>"<?= current_page('cart.php') ?>><?= h(t('nav.cart')) ?><?php if ($cartCount > 0): ?> <span class="badge"><?= h((string)$cartCount) ?></span><?php endif; ?></a></li>
                 <li><a href="<?= h(url('admin/index.php')) ?>"><?= h(t('nav.admin')) ?></a></li>
                 <li><?php if (current_lang() === 'en'): ?>
                         <a class="lang-btn" href="<?= h(url('lang.php?l=ja')) ?>">JA</a>
@@ -45,4 +47,4 @@
 </nav>
 <?php endif; ?>
 <main class="container">
-    
+

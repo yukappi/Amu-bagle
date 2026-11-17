@@ -10,3 +10,9 @@ function url(string $path = ''): string
 {
     return rtrim(BASE_URL, '/') . '/' . ltrim($path, '/');
 }
+
+// Mark the link of the page we are on (for the nav)
+function current_page(string $path): string
+{
+    return $_SERVER['SCRIPT_NAME'] === url($path) ? ' aria-current="page"' : '';
+}

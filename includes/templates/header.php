@@ -3,7 +3,7 @@
 // Before including this file, set $pageTitle on the page
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="<?= h(current_lang()) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,11 +16,17 @@
         <a class="logo" href="<?= h(url('index.php')) ?>">あむべ〜ぐる</a>
         <nav class="site-nav">
             <ul>
-                <li><a href="<?= h(url('index.php')) ?>">トップ</a></li>
-                <li><a href="<?= h(url('about.php')) ?>">お店紹介</a></li>
-                <li><a href="<?= h(url('menu.php')) ?>">メニュー</a></li>
-                <li><a href="<?= h(url('cart.php')) ?>">カート</a></li>
-                <li><a href="<?= h(url('admin/index.php')) ?>">お店の管理</a></li>
+                <li><a href="<?= h(url('index.php')) ?>"><?= h(t('nav.top')) ?></a></li>
+                <li><a href="<?= h(url('about.php')) ?>"><?= h(t('nav.about')) ?></a></li>
+                <li><a href="<?= h(url('menu.php')) ?>"><?= h(t('nav.menu')) ?></a></li>
+                <li><a href="<?= h(url('cart.php')) ?>"><?= h(t('nav.cart')) ?></a></li>
+                <li><a href="<?= h(url('admin/index.php')) ?>"><?= h(t('nav.admin')) ?></a></li>
+                    <?php if (current_lang() === 'en'): ?>
+                        <a class="lang-btn" href="<?= h(url('lang.php?l=ja')) ?>">JA</a>
+                    <?php else: ?>
+                        <a class="lang-btn" href="<?= h(url('lang.php?l=en')) ?>">EN</a>
+                    <?php endif; ?>
+                </li>
             </ul>
         </nav>
     </div>

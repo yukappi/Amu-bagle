@@ -6,7 +6,7 @@ $id = (int)($_GET['id'] ?? 0);
 
 // 1) the bagel and its category name
 $stmt = db()->prepare(
-    "SELECT p.*, c.name_ja AS category
+    "SELECT p.*, c.name_ja AS category_ja, c.name_en AS category_en
      FROM products p
      JOIN categories c ON c.id = p.category_id
      WHERE p.id = ? AND p.is_active = 1"
@@ -17,17 +17,17 @@ $product = $stmt->fetch();
 // no such bagel -> show "not found" and stop
 if (!$product) {
     http_response_code(404);
-    $pageTitle = '見つかりません | あむべ〜ぐる';
+    $pageTitle = t('product.notfound') . ' | あむべ〜ぐる';
     require __DIR__ . '/../includes/templates/header.php';
-    echo '<h1>ベーグルが見つかりません</h1>';
-    echo '<p><a href="menu.php">メニューにもどる</a></p>';
+    echo '<h1>' . h(t('product.notfound')) . '</h1>';
+    echo '<p><a href="menu.php">' . h(t('product.back')) . '</a></p>';
     require __DIR__ . '/../includes/templates/footer.php';
     exit;
 }
 
 // 2) allergens of this bagel
 $stmt = db()->prepare(
-    "SELECT a.name_ja
+    "SELECT a.name_ja, a.name_en
      FROM product_allergens pa
      JOIN allergens a ON a.id = pa.allergen_id
      WHERE pa.product_id = ?
@@ -47,11 +47,11 @@ $stmt = db()->prepare(
 $stmt->execute([$id, date('Y-m-d H:i:s')]);
 $days = $stmt->fetchAll();
 
-$pageTitle = $product['name_ja'] . ' | あむべ〜ぐる';
+$pageTitle = localized($product, 'name') . ' | あむべ〜ぐる';
 require __DIR__ . '/../includes/templates/header.php';
 ?>
 
-<p><a href="menu.php">← メニューにもどる</a></p>
+<p><a href="menu.php"><?= h(t('product.back')) ?></a></p>
 
 <article class="product">
   <?php if ($product['image_path']): ?>
@@ -59,56 +59,56 @@ require __DIR__ . '/../includes/templates/header.php';
   <?php endif; ?>
 
   <div class="product-info">
-    <span class="tag"><?= h($product['category']) ?></span>
-    <h1><?= h($product['name_ja']) ?></h1>
-    <p class="price"><?= h(number_format($product['price'])) ?> 円</p>
+    <span class="tag"><?= h(localized($product, 'category')) ?></span>
+    <h1><?= h(localized($product, 'name')) ?></h1>
+    <p class="price"><?= h(price($product['price'])) ?></p>
     <?php if ($product['is_sold_out']): ?>
-      <p class="soldout">売り切れ</p>
+      <p class="soldout"><?= h(t('soldout')) ?></p>
     <?php endif; ?>
-    <p><?= h($product['description_ja']) ?></p>
+    <p><?= h(localized($product, 'description')) ?></p>
 
-    <h2>アレルギー</h2>
+    <h2><?= h(t('product.allergens')) ?></h2>
     <?php if ($allergens): ?>
       <ul class="allergen-list">
         <?php foreach ($allergens as $a): ?>
-          <li><?= h($a['name_ja']) ?></li>
+          <li><?= h(localized($a, 'name')) ?></li>
         <?php endforeach; ?>
       </ul>
     <?php else: ?>
-      <p>確認中です。くわしくはお店にお問い合わせください。</p>
+      <p><?= h(t('product.allergens_unknown')) ?></p>
     <?php endif; ?>
 
-    <h2>買える日</h2>
+    <h2><?= h(t('product.days')) ?></h2>
     <?php if ($days): ?>
       <ul class="day-list">
         <?php foreach ($days as $d): ?>
-          <li><?= h(date('n月j日', strtotime($d['open_date']))) ?></li>
+          <li><?= h(format_date($d['open_date'])) ?></li>
         <?php endforeach; ?>
       </ul>
     <?php else: ?>
-      <p>次のOPEN日の販売はまだ決まっていません。</p>
+      <p><?= h(t('product.no_days')) ?></p>
     <?php endif; ?>
- <?php if ($days && !$product['is_sold_out']): ?>
+    <?php if ($days && !$product['is_sold_out']): ?>
       <form class="add-cart" method="post" action="cart.php">
         <?= csrf_field() ?>
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="product_id" value="<?= h($product['id']) ?>">
 
         <label>
-          受け取る日
+          <?= h(t('product.pickup_day')) ?>
           <select name="open_day_id">
             <?php foreach ($days as $d): ?>
-              <option value="<?= h($d['id']) ?>"><?= h(date('n月j日', strtotime($d['open_date']))) ?></option>
+              <option value="<?= h($d['id']) ?>"><?= h(format_date($d['open_date'])) ?></option>
             <?php endforeach; ?>
           </select>
         </label>
 
         <label>
-          個数
+          <?= h(t('product.qty')) ?>
           <input type="number" name="qty" value="1" min="1" max="20">
         </label>
 
-        <button class="btn" type="submit">カートに入れる</button>
+        <button class="btn" type="submit"><?= h(t('product.add')) ?></button>
       </form>
     <?php endif; ?>
 

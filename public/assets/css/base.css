@@ -572,3 +572,31 @@ button.btn{
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* small screens (phones) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 6px 4px;
+        font-size: 0.9rem;
+    }
+
+    .confirm-list {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .confirm-list dd {
+        margin-bottom: 10px;
+        overflow-wrap: anywhere;
+    }
+
+    .cart-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -21,7 +21,7 @@
                 <li><a href="<?= h(url('menu.php')) ?>"><?= h(t('nav.menu')) ?></a></li>
                 <li><a href="<?= h(url('cart.php')) ?>"><?= h(t('nav.cart')) ?></a></li>
                 <li><a href="<?= h(url('admin/index.php')) ?>"><?= h(t('nav.admin')) ?></a></li>
-                    <?php if (current_lang() === 'en'): ?>
+                <li><?php if (current_lang() === 'en'): ?>
                         <a class="lang-btn" href="<?= h(url('lang.php?l=ja')) ?>">JA</a>
                     <?php else: ?>
                         <a class="lang-btn" href="<?= h(url('lang.php?l=en')) ?>">EN</a>

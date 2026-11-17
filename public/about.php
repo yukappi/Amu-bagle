@@ -19,15 +19,15 @@ require __DIR__ . '/../includes/templates/header.php';
 
 <section class="shops" id="shops">
     <h2><?= h(t('about.shops')) ?></h2>
+    <p class="shops-lead"><?= h(t('about.shops_lead')) ?></p>
     <ul class="shop-list">
         <?php foreach ($shops as $shop): ?>
             <li class="shop-card">
                 <h3><?= h(localized($shop, 'name')) ?></h3>
                 <p class="shop-days"><?= h(localized($shop, 'days')) ?></p>
                 <p><?= h(localized($shop, 'description')) ?></p>
-                <p><?= h(t('about.address')) ?><?= h($shop['address'] ?? t('about.unknown')) ?></p>
-                <p><?= h(t('about.hours')) ?><?= h($shop['hours'] ?? t('about.unknown')) ?></p>
-            </li>
+                <p><span class="shop-label"><?= h(t('about.address')) ?></span><?= h($shop['address'] ?? t('about.unknown')) ?></p>
+                <p><span class="shop-label"><?= h(t('about.hours')) ?></span><?= h($shop['hours'] ?? t('about.unknown')) ?></p>
         <?php endforeach; ?>
     </ul>
 </section>

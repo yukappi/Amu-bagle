@@ -44,6 +44,7 @@ return [
     'about.our_hours'   => '11:00-16:00 (open days only)',
     'about.shops'       => 'Shops that sell our bagels',
     'about.unknown'     => 'Checking',
+    'about.shops_lead'  => 'You can also buy our bagels here on other days.',
 
     // order (complete page, cart, checkout)
     'order.day'      => 'Pickup day',

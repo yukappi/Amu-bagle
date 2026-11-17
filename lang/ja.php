@@ -44,6 +44,7 @@ return [
     'about.our_hours'   => '11:00〜16:00（OPEN日のみ）',
     'about.shops'       => 'ベーグルが買えるお店',
     'about.unknown'     => '確認中',
+    'about.shops_lead'  => 'お店のOPEN日以外は、こちらでも買えます。',
 
     // order (complete page, cart, checkout)
     'order.day'      => '受け取り日',

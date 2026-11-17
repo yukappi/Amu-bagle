@@ -702,3 +702,28 @@ main.container {
     font-size: 0.85rem;
     text-align: center;
 }
+
+/* shop cards on the about page */
+.shops-lead {
+    margin-top: -8px;
+    color: var(--c-hot);
+    font-weight: bold;
+}
+
+.shop-card {
+    border: 3px solid var(--c-navy);
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--c-navy);
+}
+
+.shop-days {
+    background: var(--c-sky);
+    border: 2px solid var(--c-navy);
+    font-weight: bold;
+}
+
+.shop-label {
+    color: var(--c-hot);
+    font-weight: bold;
+}
+

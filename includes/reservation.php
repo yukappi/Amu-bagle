@@ -6,7 +6,7 @@ function reservation_errors(array $cart, bool $lock = false): array
     $errors = [];
 
     if (!$cart['items']) {
-        return ['カートが空です。'];
+        return [t('cart.empty')];
     }
 
     // open day
@@ -19,17 +19,17 @@ function reservation_errors(array $cart, bool $lock = false): array
     $day = $stmt->fetch();
 
     if (!$day) {
-        return ['受け取り日が見つかりません。'];
+        return [t('rule.no_day')];
     }
 
     // deadline
     if ($day['cutoff_at'] <= date('Y-m-d H:i:s')) {
-        $errors[] = 'この日のご予約は締め切りました。';
+        $errors[] = t('rule.closed');
     }
 
     // check each item
     $stmt = db()->prepare(
-        "SELECT p.name_ja, p.is_sold_out, p.is_active, odp.product_id AS on_menu, odp.max_qty
+        "SELECT p.name_ja, p.name_en, p.is_sold_out, p.is_active, odp.product_id AS on_menu, odp.max_qty
          FROM products p
          LEFT JOIN open_day_products odp
            ON odp.product_id = p.id AND odp.open_day_id = ?
@@ -41,13 +41,13 @@ function reservation_errors(array $cart, bool $lock = false): array
         $p = $stmt->fetch();
 
         if (!$p || !$p['is_active']) {
-            $errors[] = '販売していない商品が入っています。';
+            $errors[] = t('rule.not_sold');
         } elseif ($p['on_menu'] === null) {
-            $errors[] = $p['name_ja'] . 'はこの日は販売していません。';
+            $errors[] = sprintf(t('rule.not_day'), localized($p, 'name'));
         } elseif ($p['is_sold_out']) {
-            $errors[] = $p['name_ja'] . 'は売り切れです。';
+            $errors[] = sprintf(t('rule.soldout'), localized($p, 'name'));
         } elseif ($p['max_qty'] !== null && $qty > $p['max_qty']) {
-            $errors[] = $p['name_ja'] . 'は' . $p['max_qty'] . '個までです。';
+            $errors[] = sprintf(t('rule.max'), localized($p, 'name'), $p['max_qty']);
         }
         $count += $qty;
     }
@@ -63,7 +63,7 @@ function reservation_errors(array $cart, bool $lock = false): array
 
     if ($booked + $count > $day['max_items']) {
         $left = max($day['max_items'] - $booked, 0);
-        $errors[] = 'この日はあと' . $left . '個までしか予約できません。';
+        $errors[] = sprintf(t('rule.left'), $left);
     }
 
     return $errors;

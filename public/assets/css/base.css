@@ -179,10 +179,12 @@ main{
     border-radius: 12px;
 }
 
-.pick h3{
-
+.pick h2,
+.pick h3 {
+    font-size: 1.17rem;
     margin: 8px 0 4px;
 }
+
 .pick p{
     margin: 0;
 }
@@ -645,6 +647,7 @@ main.container {
     margin-top: 32px;
     margin-bottom: 48px;
     padding: 24px 32px 40px;
+    min-height: 600px;
 }
 
 .btn {
@@ -859,21 +862,4 @@ body {
     .deco-bike     { top: 620px; right: 10px; width: 180px; }
 }
 
-/* phones: put the cheer girl next to the logo */
-@media (max-width: 700px) {
-    .hero {
-        position: relative;
-    }
-
-    .hero-logo img {
-        width: 55%;
-    }
-
-    .hero-pic {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 42%;
-    }
-}
 

@@ -87,7 +87,6 @@ require __DIR__ . '/../includes/templates/header.php';
 <?php if ($closed): ?>
   <p class="soldout"><?= h(t('menu.closed')) ?></p>
 <?php endif; ?>
-
 <?php if (!$products): ?>
   <p><?= h(t('menu.none')) ?></p>
 <?php endif; ?>
@@ -99,7 +98,7 @@ require __DIR__ . '/../includes/templates/header.php';
         <img src="<?= h($p['image_path']) ?>" alt="<?= h(localized($p, 'name')) ?>">
       <?php endif; ?>
       <span class="tag"><?= h(localized($p, 'category')) ?></span>
-      <h3><?= h(localized($p, 'name')) ?></h3>
+      <h2><?= h(localized($p, 'name')) ?></h2>
       <p><?= h(price($p['price'])) ?></p>
       <?php if ($p['is_sold_out']): ?>
         <p class="soldout"><?= h(t('soldout')) ?></p>

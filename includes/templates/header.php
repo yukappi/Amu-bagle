@@ -13,9 +13,21 @@ $cartCount = array_sum($_SESSION['cart']['items'] ?? []);
     <link rel="stylesheet" href="<?= h(url('assets/css/base.css')) ?>">
 </head>
 <body>
+<div class="deco" aria-hidden="true">
+    <img class="deco-whitecat" src="<?= h(url('assets/img/whitecat.webp')) ?>" alt="">
+    <img class="deco-mentai" src="<?= h(url('assets/img/mentai.webp')) ?>" alt="">
+    <img class="deco-browncat" src="<?= h(url('assets/img/browncat.webp')) ?>" alt="">
+    <img class="deco-navycat" src="<?= h(url('assets/img/navycat.webp')) ?>" alt="">
+    <img class="deco-oreo" src="<?= h(url('assets/img/oreo.webp')) ?>" alt="">
+    <img class="deco-bike" src="<?= h(url('assets/img/bike.webp')) ?>" alt="">
+</div>
+    
 <header class="site-header">
     <div class="container header-inner">
-        <a class="logo" href="<?= h(url('index.php')) ?>">あむべ〜ぐる</a>
+        <a class="logo" href="<?= h(url('index.php')) ?>">
+            <img src="<?= h(url('assets/img/logo.png')) ?>" alt="" width="640" height="409">
+            あむべ〜ぐる
+        </a>
         <nav class="site-nav">
             <ul>
                 <li><a href="<?= h(url('index.php')) ?>"<?= current_page('index.php') ?>><?= h(t('nav.top')) ?></a></li>

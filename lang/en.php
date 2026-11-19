@@ -35,6 +35,13 @@ return [
     'home.see_menu' => 'See the menu',
     'home.no_next'  => 'The next open day is not decided yet.',
     'home.picks'    => 'Our picks',
+    'home.small'    => 'A small bagel shop in Nakama',
+    'home.catch1'   => 'Chewy and soft,',
+    'home.catch2'   => 'happy bagels.',
+    'home.lead'     => 'Order our chewy bagels on this site and pick them up at the shop. (4 or more, please.)',
+    'home.cta'      => 'See the menu and order',
+
+
 
     // about page
     'about.intro'       => 'A small bagel shop in Nakama, Fukuoka. We open on irregular days, about once a week.',

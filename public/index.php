@@ -53,16 +53,29 @@ $pageTitle = 'あむべ〜ぐる | ' . t('home.title');
 require __DIR__ . '/../includes/templates/header.php';
 ?>
 
-<section class="next-open">
-  <h2><?= h(t('home.next')) ?></h2>
-  <?php if ($next): ?>
-    <p class="big"><?= h(format_date($next['open_date'])) ?></p>
-    <p><?= h(substr($next['open_time'], 0, 5)) ?>〜<?= h(substr($next['close_time'], 0, 5)) ?></p>
-    <p><?= h($leftText) ?></p>
-    <a class="btn" href="menu.php"><?= h(t('home.see_menu')) ?></a>
-  <?php else: ?>
-    <p><?= h(t('home.no_next')) ?></p>
-  <?php endif; ?>
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="hero-logo"><img src="<?= h(url('assets/img/kana.webp')) ?>" alt="アムベーグル" width="520" height="359"></h1>
+    <p class="hero-small"><?= h(t('home.small')) ?></p>
+    <p class="hero-catch"><?= h(t('home.catch1')) ?><span><?= h(t('home.catch2')) ?></span></p>
+    <p><?= h(t('home.lead')) ?></p>
+    <a class="btn" href="menu.php"><?= h(t('home.cta')) ?></a>
+
+    <?php if ($next): ?>
+      <p class="hero-next">
+        <span class="pill"><?= h(t('home.next')) ?></span>
+        <?= h(format_date($next['open_date'])) ?>
+        <?= h(substr($next['open_time'], 0, 5)) ?>〜<?= h(substr($next['close_time'], 0, 5)) ?>
+      </p>
+      <p class="hero-left"><?= h($leftText) ?></p>
+    <?php else: ?>
+      <p class="hero-left"><?= h(t('home.no_next')) ?></p>
+    <?php endif; ?>
+  </div>
+
+  <div class="hero-pic">
+    <img src="<?= h(url('assets/img/cheer.webp')) ?>" alt="" width="555" height="700">
+  </div>
 </section>
 
 <section class="picks">

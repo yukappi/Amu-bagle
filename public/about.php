@@ -28,6 +28,7 @@ require __DIR__ . '/../includes/templates/header.php';
                 <p><?= h(localized($shop, 'description')) ?></p>
                 <p><span class="shop-label"><?= h(t('about.address')) ?></span><?= h($shop['address'] ?? t('about.unknown')) ?></p>
                 <p><span class="shop-label"><?= h(t('about.hours')) ?></span><?= h($shop['hours'] ?? t('about.unknown')) ?></p>
+            </li>    
         <?php endforeach; ?>
     </ul>
 </section>

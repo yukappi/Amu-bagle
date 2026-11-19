@@ -727,3 +727,153 @@ main.container {
     font-weight: bold;
 }
 
+/* top page: big hero with the cheer girl */
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.hero > * {
+    min-width: 0;
+}
+
+.hero-logo {
+    margin: 0;
+}
+
+.hero-logo img {
+    display: block;
+    width: min(300px, 80%);
+    height: auto;
+}
+
+.hero-small {
+    color: var(--c-hot);
+    font-weight: bold;
+    margin: 12px 0 4px;
+}
+
+.hero-catch {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 12px;
+}
+
+.hero-catch span {
+    display: block;
+    color: var(--c-hot);
+}
+
+.hero-next {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin: 24px 0 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.hero-left {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+}
+
+.pill {
+    background: var(--c-lemon);
+    border: 2px solid var(--c-navy);
+    border-radius: 999px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+}
+
+.hero-pic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #dff2fb;
+}
+
+.hero-pic img {
+    width: auto;
+    max-width: 90%;
+    height: 95%;
+    object-fit: contain;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-pic {
+        width: min(320px, 100%);
+        margin: 0 auto;
+    }
+}
+
+/* header logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    width: auto;
+    height: 44px;
+}
+
+/* cats and bagels on the left and right (wide screens only) */
+body {
+    position: relative;
+}
+
+.deco {
+    display: none;
+}
+
+@media (min-width: 1300px) {
+    .deco {
+        display: block;
+    }
+
+    .deco img {
+        position: absolute;
+        width: 150px;
+        height: auto;
+        z-index: -1;
+    }
+
+    .deco-whitecat { top: 130px; left: 20px; }
+    .deco-mentai   { top: 420px; left: 40px; width: 120px; }
+    .deco-browncat { top: 650px; left: 20px; }
+    .deco-navycat  { top: 130px; right: 20px; }
+    .deco-oreo     { top: 400px; right: 40px; width: 120px; }
+    .deco-bike     { top: 620px; right: 10px; width: 180px; }
+}
+
+/* phones: put the cheer girl next to the logo */
+@media (max-width: 700px) {
+    .hero {
+        position: relative;
+    }
+
+    .hero-logo img {
+        width: 55%;
+    }
+
+    .hero-pic {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 42%;
+    }
+}
+

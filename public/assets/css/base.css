@@ -863,3 +863,22 @@ body {
 }
 
 
+/* phones: put the cheer girl next to the logo */
+@media (max-width: 700px) {
+    .hero {
+        position: relative;
+    }
+
+    .hero-logo img {
+        width: 55%;
+    }
+
+    .hero-pic {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 42%;
+    }
+}
+
+

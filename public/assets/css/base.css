@@ -881,4 +881,53 @@ body {
     }
 }
 
+/* characters peeking out (when the side ones are hidden) */
+.peek {
+    position: absolute;
+    height: auto;
+}
+
+.site-footer {
+    position: relative;
+}
+
+.peek-left {
+    top: -52px;
+    left: 12px;
+    width: 80px;
+}
+
+.peek-right {
+    top: -70px;
+    right: 8px;
+    width: 90px;
+}
+
+@media (max-width: 1299px) {
+    .site-footer {
+        margin-top: 48px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .peek {
+        display: none;
+    }
+}
+
+/* small bagel before a heading */
+.h-icon {
+    width: 48px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* navy cat announcing the next open day */
+.announce {
+    width: 72px;
+    height: auto;
+    margin-right: -4px;
+}
+
 

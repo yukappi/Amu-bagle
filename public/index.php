@@ -63,6 +63,7 @@ require __DIR__ . '/../includes/templates/header.php';
 
     <?php if ($next): ?>
       <p class="hero-next">
+        <img class="announce" src="<?= h(url('assets/img/navycat.webp')) ?>" alt="">
         <span class="pill"><?= h(t('home.next')) ?></span>
         <?= h(format_date($next['open_date'])) ?>
         <?= h(substr($next['open_time'], 0, 5)) ?>〜<?= h(substr($next['close_time'], 0, 5)) ?>
@@ -79,7 +80,7 @@ require __DIR__ . '/../includes/templates/header.php';
 </section>
 
 <section class="picks">
-  <h2><?= h(t('home.picks')) ?></h2>
+  <h2><img class="h-icon" src="<?= h(url('assets/img/mentai.webp')) ?>" alt=""><?= h(t('home.picks')) ?></h2>
   <div class="pick-list">
     <?php foreach ($picks as $p): ?>
       <a class="pick" href="product.php?id=<?= h($p['id']) ?>">
